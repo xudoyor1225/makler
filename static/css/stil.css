@@ -1,0 +1,44 @@
+.container1 {
+  padding: 4rem 2rem;
+}
+.form-section {
+  width: 45%;
+}
+.first-section > div{
+  width: 48%;
+}
+.first-section{
+  display: flex;
+  justify-content: space-between;
+}
+.form-section form{
+  background-image: linear-gradient(to right,rgba(0, 56, 255, 0.25), rgba(109, 89, 236, 0.46));
+}
+.media-section{
+  display: flex;
+}
+.media-section > div {
+  margin: 10px;
+}
+.media-title{
+  font-weight: 700;
+}
+.media-data{
+  color: #6D59EC;
+}
+.tg-icon {
+  color: #6D59EC;
+  font-size: large;
+}
+.call-icon{
+  color: #6D59EC;
+}
+.gps-icon{
+  color: #6D59EC;
+}
+.clock-icon{
+  color: #6D59EC;
+}
+.btn-color{
+  background-color: #6D59EC;
+}

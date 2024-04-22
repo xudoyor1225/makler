@@ -1,0 +1,491 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <style>
+ .carousel-caption{
+    background: linear-gradient( rgba(0,0,0,50%), rgba(0,0,0,0));
+     border-radius: 20px;
+ }
+    .carousel-item img {
+      width: 80%;
+      height: 550px;
+      border-radius: 20px;
+
+      overflow: hidden;
+    }
+    img{
+      object-fit: cover;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<body>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="#">
+            <img src="{% static 'images/logo.png' %}" alt="" />
+          </a>
+          <div class="navbar-collapse" id="">
+            <ul class="navbar-nav justify-content-between ">
+
+            </ul>
+
+            <div class="custom_menu-btn">
+              <button onclick="openNav()">
+
+                <span class="s-1">
+
+
+                </span>
+                <span class="s-2">
+
+                </span>
+                <span class="s-3">
+
+                </span>
+              </button>
+            </div>
+            <div id="myNav" class="overlay">
+              <div class="User_option">
+                <li class="">
+                  <a class="mr-4" href="./">
+                    Login
+                  </a>
+                </li>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class="slider_section ">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4 offset-md-1">
+            <div class="detail-box">
+              <h1>
+                <span> Modern</span> <br>
+                Apartment <br>
+                House
+              </h1>
+              <p>
+                It is a long established fact that a reader will be distracted by the readable content of
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end slider section -->
+  </div>
+  <!-- find section -->
+  <section class="find_section ">
+    <div class="container">
+      <form action="">
+        <div class=" form-row">
+          <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Serach Your Categories ">
+          </div>
+          <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Location ">
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="">
+              search
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </section>
+  <!-- end find section -->
+
+  <!-- sale section -->
+  <section class="sale_section layout_padding-bottom">
+    <div class="container-fluid">
+      <div class="heading_container">
+        <h2>
+          House For Sale
+        </h2>
+        <p>
+          There are many variations of passages of Lorem Ipsum available, but the
+        </p>
+      </div>
+{% if page %}
+
+    <div style="width: 100%; display: grid;grid-template-columns: repeat(3,1fr);">
+        {% for i in page.object_list %}
+        <div style="width: 435px;height: 400px; margin-left: 30px;">
+            <div>
+                <img src=" {{ i.picture.url }} " alt= "" style="width:100%;height: 300px;">
+            </div>
+            <div>
+                <a href="#">
+              apertments house
+            </a>
+            <p>
+              There are many variations of passages of Lorem Ipsum available, but
+            </p>
+            </div>
+    </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+    <p>uylar topilmadi</p>
+
+
+    {% endif %}
+      <div class="btn-box">
+          <nav aria-label="Page navigation example">
+      <ul class="pagination">
+
+          {% if page.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}">{{ page.previous_page_number }}</a></li>
+          {% endif %}
+
+        <li class="page-item"><a class="page-link active" href="#">{{ page.number }}</a></li>
+
+          {% if page.has_next %}
+            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}">{{ page.next_page_number }}</a></li>
+            <li class="page-item">
+              <a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          {% endif %}
+
+      </ul>
+    </nav>
+      </div>
+    </div>
+  </section>
+   <!-- ikkinchi -->
+  <section class="sale_section layout_padding-bottom">
+    <div class="container-fluid">
+      <div class="heading_container">
+        <h2>
+          House For Rent
+        </h2>
+        <p>
+          There are many variations of passages of Lorem Ipsum available, but the
+        </p>
+      </div>
+{% if page %}
+
+    <div style="width: 100%; display: grid;grid-template-columns: repeat(3,1fr);">
+        {% for i in page.object_list %}
+        <div style="width: 435px;height: 400px; margin-left: 30px;">
+            <div>
+                <img src=" {{ i.picture.url }} " alt= "" style="width:100%;height: 300px;">
+            </div>
+            <div>
+                <a href="#">
+              apertments house
+            </a>
+            <p>
+              There are many variations of passages of Lorem Ipsum available, but
+            </p>
+            </div>
+    </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+    <p>uylar topilmadi</p>
+
+
+    {% endif %}
+      <div class="btn-box">
+          <nav aria-label="Page navigation example">
+      <ul class="pagination">
+
+          {% if page.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}">{{ page.previous_page_number }}</a></li>
+          {% endif %}
+
+        <li class="page-item"><a class="page-link active" href="#sale-section">{{ page.number }}</a></li>
+
+          {% if page.has_next %}
+            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}">{{ page.next_page_number }}</a></li>
+            <li class="page-item">
+              <a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          {% endif %}
+
+      </ul>
+    </nav>
+      </div>
+    </div>
+  </section>
+  <section class="deal_section layout_padding-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                YANGI QURILAYOTGAN BINOLARNIU SOTIB OLISH
+              </h2>
+            </div>
+            <p>
+              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
+              in
+              some form, by injected humour, or randomised words which don't look even slightly believable.
+            </p>
+            <a href="{% url 'buildhous' %}">
+              View More
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="img-box">
+            <div class="box b1">
+              <img src="{% static 'images/d-1.jpg' %}" alt="">
+            </div>
+            <div class="box b1">
+              <img src="{% static 'images/d-2.jpg' %}" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- us section -->
+  <section class="us_section layout_padding2">
+
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Why Choose Us
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'images/u-1.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h3 class="price">
+                1000+
+              </h3>
+              <h5>
+                Years of House
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'images/u-2.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h3>
+                20000+
+              </h3>
+              <h5>
+                Projects Delivered
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'images/u-3.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h3>
+                10000+
+              </h3>
+              <h5>
+                Satisfied Customers
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'images/u-4.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h3>
+                1500+
+              </h3>
+              <h5>
+                Cheap Rates
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end us section -->
+  <!-- contact section -->
+            <div class="map-responsive">
+              <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Eiffel+Tower+Paris+France" width="600" height="300" frameborder="0" style="border:0; width: 100%; height:400px
+              " allowfullscreen></iframe>
+            </div>
+  <section class="info_section ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="info_contact">
+            <h5>
+              About Apartment
+            </h5>
+            <div>
+              <div class="img-box">
+                <img src="{% static 'images/location.png' %}" width="18px" alt="">
+              </div>
+              <p>
+                Address
+              </p>
+            </div>
+            <div>
+              <div class="img-box">
+                <img src="{% static 'images/phone.png' %}" width="12px" alt="">
+              </div>
+              <p>
+                +01 1234567890
+              </p>
+            </div>
+            <div>
+              <div class="img-box">
+                <img src="{% static 'images/mail.png' %}" width="18px" alt="">
+              </div>
+              <p>
+                demo@gmail.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_info">
+            <h5>
+              Information
+            </h5>
+            <p>
+              Hovli yoki kvartira sotib olmoqchi yoki sotish va ijaraga berish hizmatlaridan foydalanish uchun adminga murojat qilinadi.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="col-md-3">
+          <div class="info_form ">
+            <h5>
+              Newsletter
+            </h5>
+            <div class="social_box">
+              <a href="">
+                <img src="{% static 'images/fb.png' %}" alt="">
+              </a>
+              <a href="">
+                <img src="{% static 'images/twitter.png' %}" alt="">
+              </a>
+              <a href="">
+                <img src="{% static 'images/linkedin.png' %}" alt="">
+              </a>
+              <a href="">
+                <img src="{% static 'images/youtube.png' %}" alt="">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- footer section -->
+  <section class="container-fluid footer_section ">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> Admin
+        <a href="#">.....................</a>
+      </p>
+    </div>
+  </section>
+  <!-- end  footer section -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="script1.js">
+    const swiper = new Swiper(".swiper", {
+      direction: "horizontal",
+      loop: false,
+      speed: 1500,
+      slidesPerView: 4,
+      spaceBetween: 60,
+      mousewheel: true,
+      parallax: true,
+      centeredSlides: true,
+      effect: "coverflow",
+      coverflowEffect: {
+        rotate: 40,
+        slideShadows: true
+      },
+      autoplay: {
+        delay: 2000,
+        pauseOnMouseEnter: true
+      },
+      scrollbar: {
+        el: ".swiper-scrollbar"
+      },
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+          spaceBetween: 60
+        },
+        600: {
+          slidesPerView: 2,
+          spaceBetween: 60
+        },
+        1000: {
+          slidesPerView: 3,
+          spaceBetween: 60
+        },
+        1400: {
+          slidesPerView: 4,
+          spaceBetween: 60
+        },
+        2300: {
+          slidesPerView: 5,
+          spaceBetween: 60
+        },
+        2900: {
+          slidesPerView: 6,
+          spaceBetween: 60
+        }
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+{% endblock content %}
+</body>
+
+</html>
