@@ -27,23 +27,13 @@ class Stars(models.Model):
     def __str__(self):
         return str(self.stars)
 
-class UyRasmlari(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    uy = models.ForeignKey(Uylar, on_delete=models.CASCADE)
-    picture = models.ImageField(default='default.jpg')
-
-    def __str__(self):
-        return f"{str(self.id), str(self.uy)}"
-
-
 class Vazifalar(models.Model):
     vazifa = models.CharField(max_length=50)
 
     def __str__(self):
         return f"{str(self.id),str(self.vazifa)}"
-
 class Xususiyati(models.Model):
-    xususiyat_id = models.ForeignKey(Uylar, on_delete=models.CASCADE)
+    uy = models.ForeignKey(Uylar, on_delete=models.CASCADE)
     vazifasi = models.ForeignKey(Vazifalar, on_delete=models.CASCADE)
     narxi = models.CharField(max_length=255)
     sana = models.DateTimeField()
@@ -51,4 +41,17 @@ class Xususiyati(models.Model):
 
     def __str__(self):
         return str(self.uy)
+class UyRasmlari(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    xususiyat_id= models.ForeignKey(Xususiyati, on_delete=models.CASCADE)
+
+    picture = models.ImageField(default='default.jpg')
+
+    def __str__(self):
+        return f"{str(self.id), str(self.xususiyat_id)}"
+
+
+
+
+
 

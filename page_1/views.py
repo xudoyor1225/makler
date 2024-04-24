@@ -22,24 +22,24 @@ class Home_sahifasi(View):
 
 
 
+
+
         # uylar = UyRasmlari.objects.all().order_by('id')
         # uylar_id = Uylar.objects.values_list('id',flat=True)
-        # vazifalar =Xususiyati.objects.values_list('vazifasi',flat=True).values_list('id',flat=True)
-        # if vazifalar == 1:
-        #         uylar = UyRasmlari.objects.get()
 
-        search_query = request.GET.get('q', '')
-        if search_query:
-            kitoblar = UyRasmlari.objects.filter(title__icontains=search_query)
 
-        paginator = Paginator(uylar, 6)
-
-        page_num = request.GET.get('bet', 1)
-
-        page = paginator.page(page_num)
-
-        return render(request, "home.html", {'page':page, 'search':search_query})
-
+        # search_query = request.GET.get('q', '')
+        # if search_query:
+        #     kitoblar = UyRasmlari.objects.filter(title__icontains=search_query)
+        #
+        # paginator = Paginator(uylar, 6)
+        #
+        # page_num = request.GET.get('bet', 1)
+        #
+        # page = paginator.page(page_num)
+        #
+        return render(request, "home.html", {'xususiyat_photos': xususiyat_photos})
+        #
 
 
 class mijozqoshish(TemplateView):

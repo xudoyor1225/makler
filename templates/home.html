@@ -120,10 +120,10 @@
 {% if page %}
 
     <div style="width: 100%; display: grid;grid-template-columns: repeat(3,1fr);">
-        {% for i in page.object_list %}
+        {% for x in xususiyat_photos %}
         <div style="width: 435px;height: 400px; margin-left: 30px;">
             <div>
-                <img src=" {{ i.picture.url }} " alt= "" style="width:100%;height: 300px;">
+                <img src=" {{ x.picture.url }} " alt= "" style="width:100%;height: 300px;">
             </div>
             <div>
                 <a href="#">
@@ -143,99 +143,99 @@
 
     {% endif %}
       <div class="btn-box">
-          <nav aria-label="Page navigation example">
-      <ul class="pagination">
-
-          {% if page.has_previous %}
-            <li class="page-item">
-              <a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}">{{ page.previous_page_number }}</a></li>
-          {% endif %}
-
-        <li class="page-item"><a class="page-link active" href="#">{{ page.number }}</a></li>
-
-          {% if page.has_next %}
-            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}">{{ page.next_page_number }}</a></li>
-            <li class="page-item">
-              <a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          {% endif %}
-
-      </ul>
-    </nav>
+{#          <nav aria-label="Page navigation example">#}
+{#      <ul class="pagination">#}
+{##}
+{#          {% if page.has_previous %}#}
+{#            <li class="page-item">#}
+{#              <a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}" aria-label="Previous">#}
+{#                <span aria-hidden="true">&laquo;</span>#}
+{#              </a>#}
+{#            </li>#}
+{#            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}">{{ page.previous_page_number }}</a></li>#}
+{#          {% endif %}#}
+{##}
+{#        <li class="page-item"><a class="page-link active" href="#">{{ page.number }}</a></li>#}
+{##}
+{#          {% if page.has_next %}#}
+{#            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}">{{ page.next_page_number }}</a></li>#}
+{#            <li class="page-item">#}
+{#              <a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}" aria-label="Next">#}
+{#                <span aria-hidden="true">&raquo;</span>#}
+{#              </a>#}
+{#            </li>#}
+{#          {% endif %}#}
+{##}
+{#      </ul>#}
+{#    </nav>#}
       </div>
     </div>
   </section>
    <!-- ikkinchi -->
-  <section class="sale_section layout_padding-bottom">
-    <div class="container-fluid">
-      <div class="heading_container">
-        <h2>
-          House For Rent
-        </h2>
-        <p>
-          There are many variations of passages of Lorem Ipsum available, but the
-        </p>
-      </div>
-{% if page %}
-
-    <div style="width: 100%; display: grid;grid-template-columns: repeat(3,1fr);">
-        {% for i in page.object_list %}
-        <div style="width: 435px;height: 400px; margin-left: 30px;">
-            <div>
-                <img src=" {{ i.picture.url }} " alt= "" style="width:100%;height: 300px;">
-            </div>
-            <div>
-                <a href="#">
-              apertments house
-            </a>
-            <p>
-              There are many variations of passages of Lorem Ipsum available, but
-            </p>
-            </div>
-    </div>
-        {% endfor %}
-
-    </div>
-    {% else %}
-    <p>uylar topilmadi</p>
-
-
-    {% endif %}
-      <div class="btn-box">
-          <nav aria-label="Page navigation example">
-      <ul class="pagination">
-
-          {% if page.has_previous %}
-            <li class="page-item">
-              <a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}">{{ page.previous_page_number }}</a></li>
-          {% endif %}
-
-        <li class="page-item"><a class="page-link active" href="#sale-section">{{ page.number }}</a></li>
-
-          {% if page.has_next %}
-            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}">{{ page.next_page_number }}</a></li>
-            <li class="page-item">
-              <a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          {% endif %}
-
-      </ul>
-    </nav>
-      </div>
-    </div>
-  </section>
+{#  <section class="sale_section layout_padding-bottom">#}
+{#    <div class="container-fluid">#}
+{#      <div class="heading_container">#}
+{#        <h2>#}
+{#          House For Rent#}
+{#        </h2>#}
+{#        <p>#}
+{#          There are many variations of passages of Lorem Ipsum available, but the#}
+{#        </p>#}
+{#      </div>#}
+{#{% if page %}#}
+{##}
+{#    <div style="width: 100%; display: grid;grid-template-columns: repeat(3,1fr);">#}
+{#        {% for i in page.object_list %}#}
+{#        <div style="width: 435px;height: 400px; margin-left: 30px;">#}
+{#            <div>#}
+{#                <img src=" {{ i.picture.url }} " alt= "" style="width:100%;height: 300px;">#}
+{#            </div>#}
+{#            <div>#}
+{#                <a href="#">#}
+{#              apertments house#}
+{#            </a>#}
+{#            <p>#}
+{#              There are many variations of passages of Lorem Ipsum available, but#}
+{#            </p>#}
+{#            </div>#}
+{#    </div>#}
+{#        {% endfor %}#}
+{##}
+{#    </div>#}
+{#    {% else %}#}
+{#    <p>uylar topilmadi</p>#}
+{##}
+{##}
+{#    {% endif %}#}
+{#      <div class="btn-box">#}
+{#          <nav aria-label="Page navigation example">#}
+{#      <ul class="pagination">#}
+{##}
+{#          {% if page.has_previous %}#}
+{#            <li class="page-item">#}
+{#              <a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}" aria-label="Previous">#}
+{#                <span aria-hidden="true">&laquo;</span>#}
+{#              </a>#}
+{#            </li>#}
+{#            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.previous_page_number}}&q={{search}}">{{ page.previous_page_number }}</a></li>#}
+{#          {% endif %}#}
+{##}
+{#        <li class="page-item"><a class="page-link active" href="#sale-section">{{ page.number }}</a></li>#}
+{##}
+{#          {% if page.has_next %}#}
+{#            <li class="page-item"><a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}">{{ page.next_page_number }}</a></li>#}
+{#            <li class="page-item">#}
+{#              <a class="page-link" href="{% url 'home' %}?bet={{page.next_page_number}}&q={{search}}" aria-label="Next">#}
+{#                <span aria-hidden="true">&raquo;</span>#}
+{#              </a>#}
+{#            </li>#}
+{#          {% endif %}#}
+{##}
+{#      </ul>#}
+{#    </nav>#}
+{#      </div>#}
+{#    </div>#}
+{#  </section>#}
   <section class="deal_section layout_padding-bottom">
     <div class="container">
       <div class="row">
