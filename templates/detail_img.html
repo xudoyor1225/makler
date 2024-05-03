@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        div {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        p {
+            margin: 5px 0;
+        }
+    </style>
+<body>
+    <div>
+        {% for i in Uy_picture %}
+            <img src="{{ i.picture.url }}">
+        {% endfor %}
+    </div>
+    <div>
+        <p> {{ xususiyat.narxi }}</p>
+        <p>{{ xususiyat.sana }}</p>
+        <p>{{ xususiyat.uy.holati }}</p>
+        <p>{{ xususiyat.uy.xonalar_soni }}</p>
+        <p>{{ xususiyat.uy.yashash_maydoni }}</p>
+    </div>
+
+
+</body>
+</html>

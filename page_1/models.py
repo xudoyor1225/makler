@@ -38,6 +38,7 @@ class Xususiyati(models.Model):
     narxi = models.CharField(max_length=255)
     sana = models.DateTimeField()
     star = models.ForeignKey(Stars, on_delete=models.CASCADE)
+    defaultimage = models.ImageField(default='defaulthome.jpg')
 
     def __str__(self):
         return str(self.uy)

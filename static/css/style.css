@@ -357,6 +357,7 @@ a:focus {
   border-radius: 0;
   height: 45px;
   margin: 10px 0;
+  width: 800px;
 }
 
 .find_section form button {
@@ -367,6 +368,7 @@ a:focus {
   height: 45px;
   width: 100%;
   margin: 10px 0;
+  margin-left: 420px;
 }
 
 .about_section {
