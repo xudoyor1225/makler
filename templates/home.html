@@ -109,16 +109,16 @@
         </p>
       </div>
 
-    <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="width: 100%; display: grid;grid-template-columns: repeat(3,1fr);">
+    <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded " style="width: 100%; display: grid;grid-template-columns: repeat(3,1fr); ">
         {% for x in xususiyatlar %}
             {% if x.star.stars >= 4 %}
-        <div style="width: 435px;height: 400px; margin-left: 30px; border: 1px solid black;margin-bottom: 30px">
+        <div class="card" style="width: 435px;height: 400px; margin-left: 30px; border: 1px solid black;margin-bottom: 30px; border-radius: 15px">
             <div>
                 <a href="{% url 'detail_home' x.id %}">
-                    <img src=" {{ x.defaultimage.url }} " alt= "jpg" style="width:100%;height: 300px;">
+                    <img class="card-img-top" src=" {{ x.defaultimage.url }} " alt= "jpg" style="width:100%;height: 300px; border-radius: 15px">
                 </a>
             </div>
-            <div style="border: 3px solid yellow;height: 98px">
+            <div style="border: 3px solid yellow;height: 98px; border-radius: 15px">
 
                 <span>{{ x.vazifasi.vazifa }}</span><br>
 
@@ -129,13 +129,13 @@
             </div>
     </div>
             {% elif x.star.stars == 3 %}
-                <div style="width: 435px;height: 400px; margin-left: 30px; border: 1px solid black;margin-bottom: 30px">
+                <div style="width: 435px;height: 400px; margin-left: 30px; border: 1px solid black;margin-bottom: 30px; border-radius: 15px">
             <div>
                 <a href="{% url 'detail_home' x.id %}">
-                    <img src=" {{ x.defaultimage.url }} " alt= "jpg" style="width:100%;height: 300px;">
+                    <img src=" {{ x.defaultimage.url }} " alt= "jpg" style="width:100%;height: 300px; border-radius: 15px">
                 </a>
             </div>
-            <div style="border: 3px solid green;height: 98px">
+            <div style="border: 3px solid green;height: 98px; border-radius: 15px">
                 <span>{{ x.vazifasi.vazifa }}</span><br>
                 <span>stars<{{ x.star.stars }}></span>
             <p>
@@ -144,13 +144,13 @@
             </div>
     </div>
              {% else %}
-            <div style="width: 435px;height: 400px; margin-left: 30px; border: 1px solid black">
+            <div style="width: 435px;height: 400px; margin-left: 30px; border: 1px solid black; border-radius: 15px">
             <div>
                 <a href="{% url 'detail_home' x.id %}">
-                    <img src=" {{ x.defaultimage.url }} " alt= "jpg" style="width:100%;height: 300px;">
+                    <img src=" {{ x.defaultimage.url }} " alt= "jpg" style="width:100%;height: 300px;border-radius: 15px">
                 </a>
             </div>
-            <div style="height: 98px">
+            <div style="height: 98px;border-radius: 15px">
                 <span>{{ x.vazifasi.vazifa }}</span><br>
                 <span>stars<{{ x.star.stars }}></span>
             <p>
@@ -160,6 +160,13 @@
     </div>
             {% endif %}
         {% endfor %}
+    <div>
+        <a>
+            <i style="font-size: 300px; margin-left: 80px" class="bi bi-plus-circle-fill"></i>
+        </a>
+
+    </div>
+
 
     </div>
 
