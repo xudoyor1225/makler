@@ -1,18 +1,22 @@
+from django.contrib import messages
+from django.contrib.auth import login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
+
 from django.shortcuts import render
 from django.views.generic import TemplateView,ListView, View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import UyRasmlari, Uylar, Xususiyati, Vazifalar
 
 from django.shortcuts import render, redirect
-from .forms import MijozForm, UylarForm,XususiyatForm
+from .forms import MijozForm, UylarForm, XususiyatForm, UypictureForm, CustomAuthenticationForm
+
 
 class Home_sahifasi(View):
     def get(self, request):
         xususiyatlar = Xususiyati.objects.all()
-        search = Uylar.objects.all().order_by('joylashuvi')
         search_query = request.GET.get('q', '')
-        if search_query:
-            search = Uylar.objects.filter(title__icontains=search_query)
+
 
         return render(request, "home.html", {"xususiyatlar":xususiyatlar, "search":search_query})
 
@@ -70,3 +74,19 @@ class detail_home(View):
 
         return render(request, 'detail_img.html', {'Uy_picture':Uy_picture, "xususiyat":xususiyat})
 
+class addpicture(View):
+    def get(self,request):
+        form=UypictureForm()
+        return render(request,"addpicturre.html",{"form":form})
+    def post(self,request):
+        form=UypictureForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            return render(request,"addpicturre.html",{"form":form})
+
+
+class CustomLoginView(LoginView):
+    form_class = CustomAuthenticationForm
+    template_name = 'login.html'

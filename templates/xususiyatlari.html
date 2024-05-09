@@ -65,6 +65,21 @@
   button[type="submit"]:hover {
     background-color: #0056b3; /* Mouse o'rganish bo'lganda tugma rangi */
   }
+  .tg-icon {
+  color: #28a745;
+}
+
+.call-icon {
+  color: #17a2b8;
+}
+
+.gps-icon {
+  color: #007bff;
+}
+
+.clock-icon {
+  color: #ffc107;
+}
 
   .info-section {
     background-color: #f8f9fa; /* Ma'lumotlar qismi rangi */
@@ -95,10 +110,13 @@
   <div class="container">
     <div class="container1 d-flex justify-content-between">
       <div class="form-section">
-        <form action="" class="form-control p-4">
+        <form method="post" action="" class="form-control p-4">
         {% csrf_token %}
           {{ form.as_p }}
-         <button type="submit">Saqlash</button>
+         <button class="btn btn-success" type="submit">Saqlash</button>
+             <a href="{% url 'addpicture' %}">
+                <button class="btn btn-success" type="button">Next</button>
+            </a>
         </form>
       </div>
 

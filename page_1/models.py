@@ -1,5 +1,6 @@
 # Create your models here.
 from django.db import models
+from datetime import datetime
 class Mijoz(models.Model):
     ismi = models.CharField(max_length=255)
     familyasi = models.CharField(max_length=255)
@@ -36,7 +37,7 @@ class Xususiyati(models.Model):
     uy = models.ForeignKey(Uylar, on_delete=models.CASCADE)
     vazifasi = models.ForeignKey(Vazifalar, on_delete=models.CASCADE)
     narxi = models.CharField(max_length=255)
-    sana = models.DateTimeField()
+    sana = models.DateTimeField(default=datetime.now(), blank=True)
     star = models.ForeignKey(Stars, on_delete=models.CASCADE)
     defaultimage = models.ImageField(default='defaulthome.jpg')
 
