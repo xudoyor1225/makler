@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %} picture page {% endblock %}
 {% block content %}
 <style>
 .image-container {
@@ -10,6 +11,23 @@
 .image-container img {
   display: block;
 
+}
+.carousel-item {
+  transition: opacity 1s ease-in-out; /* Animatsiya uchun CSS transition */
+  opacity: 0; /* Barcha rasmlarni yashirish */
+}
+
+.carousel-item.active {
+  opacity: 1; /* Faol rasmlarni ko'rsatish */
+}
+
+.carousel-item {
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
+}
+
+.carousel-item.active {
+    opacity: 1;
 }
 
 .overlay {
@@ -37,7 +55,7 @@
     <!-- header section strats -->
     <header class="header_section">
       <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container">
+        <nav class="navbar navbar-expand-lg custom_nav-container" style="height: 150px;">
           <a class="navbar-brand" href="#">
             <img src="{% static 'images/logo.png' %}" alt="" />
           </a>
@@ -45,10 +63,19 @@
             <ul class="navbar-nav justify-content-between ">
 
             </ul>
-
+        {% if request.user.is_authenticated %}
+            <div class=" dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ request.user.username }}
+              </a>
+              <ul class="dropdown-menu">
+                <a href="{% url 'logout' %}"><button class="btn btn-primary" style="margin-left: 40px; height: 100%">log out</button></a>
+              </ul>
+            </div>
+        {% else %}
             <div class="custom_menu-btn">
               <button onclick="openNav()">
-                  <a href="login.html">
+                  <a href="{% url 'login' %}">
 
                 <span class="s-1">
 
@@ -64,7 +91,7 @@
               </button>
 
             </div>
-
+{% endif %}
           </div>
         </nav>
       </div>
@@ -94,27 +121,7 @@
     <!-- end slider section -->
   </div>
   <!-- find section -->
-  <section class="find_section ">
-    <div class="container">
-      <form action="">
-        <div class=" form-row">
-            <form method="get">
-          <div class="col-md-5">
 
-            <input type="search" class="form-control" placeholder="Location " name="q" value="{{search}}">
-          </div>
-          <div class="col-md-2">
-            <button type="submit" class="">
-              search
-            </button>
-
-          </div>
-            </form>
-        </div>
-
-      </form>
-    </div>
-  </section>
   <!-- end find section -->
     <div style="margin-left: 18%">
         <div id="carouselExampleIndicators" class="carousel slide slide m-5 shadow-lg p-3 mb-5 bg-body-tertiary rounded " style="width: 900px;height: 600px; margin-left: 100px">
@@ -143,39 +150,79 @@
       </div></div>
 
   <!-- sale section -->
-  <section class="sale_section layout_padding-bottom">
+    <!-- 1 chi-->
+  <section id="uy" class="sale_section layout_padding-bottom">
     <div class="container-fluid">
       <div class="heading_container">
         <h2>
           Uylar siz uchun
         </h2>
         <p>
-          There are many variations of passages of Lorem Ipsum available, but the
+          chiroyli zamonaviy yangi ixcham va shinam
         </p>
       </div>
 
-    <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded " style="width: 100%; display: grid;grid-template-columns: repeat(3,1fr); ">
-        {% for x in xususiyatlar %}
+<section  class="find_section ">
+    <div class="container">
+      <form action="">
+        <div class=" form-row">
+            <form method="get">
+          <div class="col-md-5">
+
+            <input type="text" class="form-control" placeholder="Location " name="q" value="{{search}}">
+          </div>
+          <div class="col-md-2">
+            <button type="submit" >
+              search
+            </button>
+
+          </div>
+            </form>
+        </div>
+
+      </form>
+    </div>
+  </section>
+<div  style="margin-left: 40%;display: flex;gap:40px">
+    {% if vaz %}
+    {% for i in vaz %}
+        <div>
+            <a href="{% url 'homes' i.id %}#uy"><button type="button" class="btn btn-outline-primary">{{ i.vazifa }}</button> </a>
+        </div>
+
+    {% endfor %}
+    {% else %}
+        <p>yoq</p>
+    {% endif %}
+</div>
+
+
+
+
+    <div  class="shadow-lg p-3 mb-5 bg-body-tertiary rounded " style="width: 100%; display: grid;grid-template-columns: repeat(3,1fr); ">
+
+
+
+        {% for i in uylar %}
 
         <div class="card" style="width: 435px;height: 400px; margin-left: 30px; border: 1px solid black;margin-bottom: 30px; border-radius: 15px">
             <div class="image-container">
-                <a  href="{% url 'detail_home' x.id %}">
-                    <img class="card-img-top " src=" {{ x.defaultimage.url }} " alt= "jpg" style="width:100%;height: 300px; border-radius: 15px">
+                <a  href="{% url 'detail_home' i.id %}">
+                    <img class="card-img-top " src=" {{ i.defaultimage.url }} " alt= "jpg" style="width:100%;height: 300px; border-radius: 15px">
                     <div class="overlay"></div>
                 </a>
             </div>
             <div class="text-lg-center " style="height: 98px; border-radius: 15px">
 
-                <span>{{ x.vazifasi.vazifa }}</span><br>
+                <span>{{ i.vazifasi.vazifa }}</span><br>
 
-                <span>stars<{{ x.star.stars }}></span>
+                <span>stars<{{ i.star.stars }}></span>
             <p>
-              {{ x.uy.joylashuvi }}
+              {{ i.uy.joylashuvi }}
             </p>
             </div>
 
     </div>
-
         {% endfor %}
     {% if request.user.is_superuser %}
     <div>

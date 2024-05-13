@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 
@@ -9,16 +9,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import UyRasmlari, Uylar, Xususiyati, Vazifalar
 
 from django.shortcuts import render, redirect
-from .forms import MijozForm, UylarForm, XususiyatForm, UypictureForm, CustomAuthenticationForm
+from .forms import MijozForm, UylarForm, XususiyatForm, UypictureForm, UserLoginForm
 
 
 class Home_sahifasi(View):
     def get(self, request):
         xususiyatlar = Xususiyati.objects.all()
-        search_query = request.GET.get('q', '')
+        vazifa = Vazifalar.objects.all()
 
 
-        return render(request, "home.html", {"xususiyatlar":xususiyatlar, "search":search_query})
+        return render(request, "home.html", {"xususiyatlar":xususiyatlar, "vaz":vazifa})
+
 
 class AdminCheck(UserPassesTestMixin):
     def test_func(self):
@@ -87,6 +88,39 @@ class addpicture(View):
             return render(request,"addpicturre.html",{"form":form})
 
 
-class CustomLoginView(LoginView):
-    form_class = CustomAuthenticationForm
-    template_name = 'login.html'
+class LoginView(View):
+    def get(self, request):
+        user = UserLoginForm()
+        return render(request, "login.html", {'user':user})
+
+    def post(self, request):
+        check = AuthenticationForm(data=request.POST)
+
+        if check.is_valid():
+            user = check.get_user()
+            login(request, user)
+            messages.success(request, "Siz tizimga kirdingiz!")
+            return redirect('home')
+        else:
+            return redirect('login')
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        messages.info(request, "Siz tizimdan chiqdingiz!")
+        return redirect("home")
+
+
+class HomesView(View):
+    def get(self, request,id):
+        uylar = Xususiyati.objects.filter(vazifasi=id)
+        xususiyatlar = Xususiyati.objects.all()
+        vazifa = Vazifalar.objects.all()
+
+        search_query = request.GET.get('q','')
+        if search_query:
+            uylar = Xususiyati.objects.filter(uy__joylashuvi__icontains=search_query)
+
+
+        return render(request, "home.html", {"xususiyatlar": xususiyatlar, "vaz": vazifa,"uylar":uylar,"search":search_query})
+

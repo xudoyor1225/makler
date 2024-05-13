@@ -25,6 +25,6 @@ class UypictureForm(forms.ModelForm):
         fields = ['xususiyat_id','picture']
 
 
-class CustomAuthenticationForm(AuthenticationForm):
-    class Meta:
-        fields = ['username', 'password']
+class UserLoginForm(forms.Form):
+    username = forms.CharField(max_length=150)
+    password = forms.CharField(max_length=128)

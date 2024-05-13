@@ -85,7 +85,7 @@
       <div class="form-section">
         <form method="post" action="" class="form-control p-4">
          {% csrf_token %}
-         {{ form.as_p }}
+         {{ user.as_p }}
             <button class="btn btn-success" type="submit">Save</button>
         </form>
       </div>
