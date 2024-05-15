@@ -122,5 +122,7 @@ class HomesView(View):
             uylar = Xususiyati.objects.filter(uy__joylashuvi__icontains=search_query)
 
 
+
+
         return render(request, "home.html", {"xususiyatlar": xususiyatlar, "vaz": vazifa,"uylar":uylar,"search":search_query})
 

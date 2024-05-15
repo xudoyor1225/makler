@@ -12,8 +12,8 @@ class Mijoz(models.Model):
         return str(self.ismi)
 
 class Uylar(models.Model):
-    mijoz = models.ForeignKey(Mijoz, on_delete=models.CASCADE)
-    holati = models.TextField()
+    клиент= models.ForeignKey(Mijoz, on_delete=models.CASCADE)
+    положениедел = models.TextField()
     yashash_maydoni = models.CharField(max_length=255)
     xonalar_soni = models.BigIntegerField()
     joylashuvi = models.CharField(max_length=255)
@@ -42,7 +42,7 @@ class Xususiyati(models.Model):
     defaultimage = models.ImageField(default='defaulthome.jpg')
 
     def __str__(self):
-        return str(self.uy)
+        return f"{str(self.id), str(self.vazifasi)}"
 class UyRasmlari(models.Model):
     id = models.BigAutoField(primary_key=True)
     xususiyat_id= models.ForeignKey(Xususiyati, on_delete=models.CASCADE)
@@ -50,7 +50,7 @@ class UyRasmlari(models.Model):
     picture = models.ImageField(default='default.jpg')
 
     def __str__(self):
-        return f"{str(self.id), str(self.xususiyat_id)}"
+        return f"{str(self.xususiyat_id)}"
 
 
 

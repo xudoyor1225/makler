@@ -7,12 +7,12 @@ from django.contrib.auth.models import User
 class MijozForm(forms.ModelForm):
     class Meta:
         model = Mijoz
-        fields = ['ismi', 'familyasi', 't_sana', 'tel', 'yashash_manzili']
+        fields = '__all__'
 
 class UylarForm(forms.ModelForm):
     class Meta:
         model = Uylar
-        fields = ['mijoz', 'holati', 'yashash_maydoni','xonalar_soni', 'joylashuvi']
+        fields = '__all__'
 
 class XususiyatForm(forms.ModelForm):
     class Meta:
