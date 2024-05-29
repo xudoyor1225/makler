@@ -44,7 +44,7 @@ class Xususiyati(models.Model):
     defaultimage = models.ImageField(default='defaulthome.jpg')
 
     def __str__(self):
-        return f"{str(self.id), str(self.vazifasi)}"
+        return str(self.uy)
 class UyRasmlari(models.Model):
     id = models.BigAutoField(primary_key=True)
     xususiyat_id= models.ForeignKey(Xususiyati, on_delete=models.CASCADE)

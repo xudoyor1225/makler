@@ -103,7 +103,7 @@ class addpicture(View):
         form=UypictureForm(data=request.POST,files=request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('addpicture')
         else:
             return render(request,"addpicturre.html",{"form":form})
 
