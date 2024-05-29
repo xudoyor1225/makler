@@ -87,6 +87,7 @@
          {% csrf_token %}
          {{ user.as_p }}
             <button class="btn btn-success" type="submit">Сохранить</button>
+          <a href="{% url 'register' %}">Registratsiya</a>
         </form>
       </div>
       <div class="info-section ml-5 w-50">

@@ -3,13 +3,13 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 
-from django.shortcuts import render
+from django.shortcuts import render,reverse
 from django.views.generic import TemplateView,ListView, View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import UyRasmlari, Uylar, Xususiyati, Vazifalar
+from .models import UyRasmlari, Uylar, Xususiyati, Vazifalar,Review
 
 from django.shortcuts import render, redirect
-from .forms import MijozForm, UylarForm, XususiyatForm, UypictureForm, UserLoginForm
+from .forms import MijozForm, UylarForm, XususiyatForm, UypictureForm, UserLoginForm, UserRegistrForm,ReviewForm
 
 
 class Home_sahifasi(View):
@@ -45,7 +45,7 @@ class xususiyat(View):
         form=XususiyatForm()
         return render(request,"xususiyatlari.html",{"form":form})
     def post(self,request):
-        form=XususiyatForm(data=request.POST)
+        form=XususiyatForm(data=request.POST,files=request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -58,7 +58,7 @@ class uylar(View):
         form=UylarForm()
         return render(request,"uylar.html",{"form":form})
     def post(self,request):
-        form=UylarForm(data=request.POST)
+        form=UylarForm(data=request.POST,files=request.FILES)
         if form.is_valid():
             form.save()
             return redirect('xususiyat')
@@ -70,17 +70,37 @@ class uylar(View):
 
 class detail_home(View):
     def get(self, request, a):
+        review_form = ReviewForm()
+        uy = Xususiyati.objects.get(id=a).uy
+        # print(uy)
+        sharxlar = Review.objects.filter(uy_id=uy.id)
         xususiyat = Xususiyati.objects.get(pk=a)
         Uy_picture = UyRasmlari.objects.filter(xususiyat_id=a)
+        return render(request, 'detail_img.html', {'Uy_picture':Uy_picture, "xususiyat":xususiyat,'form': review_form,'sharxlar': sharxlar})
 
-        return render(request, 'detail_img.html', {'Uy_picture':Uy_picture, "xususiyat":xususiyat})
+    def post(self, request, a):
+        review_form = ReviewForm(data=request.POST)
+        uy = Xususiyati.objects.get(id=a).uy
+        # print(uy)
+        sharxlar = Review.objects.filter(uy_id=uy.id)
+        # print(sharxlar)
+        if review_form.is_valid():
+            Review.objects.create(
+                uy_id=uy,
+                user_id=request.user,
+                description=review_form.cleaned_data['description'],
+                stars=review_form.cleaned_data["stars"]
+            )
+            return redirect(reverse("detail_home", kwargs={'a': uy.id}))
+        print(sharxlar)
+        return render(request, "detail_img.html", {'uy': uy, 'sharxlar': sharxlar, 'form': review_form})
 
 class addpicture(View):
     def get(self,request):
         form=UypictureForm()
         return render(request,"addpicturre.html",{"form":form})
     def post(self,request):
-        form=UypictureForm(data=request.POST)
+        form=UypictureForm(data=request.POST,files=request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -126,3 +146,15 @@ class HomesView(View):
 
         return render(request, "home.html", {"xususiyatlar": xususiyatlar, "vaz": vazifa,"uylar":uylar,"search":search_query})
 
+class UserRegistrView(View):
+    def get(self,request):
+        form=UserRegistrForm()
+        return render(request,'register.html',{'form':form})
+
+    def post(self, request):
+        form = UserRegistrForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("login")
+        else:
+            return render(request, "register.html", {'form': form})

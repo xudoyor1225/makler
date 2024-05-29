@@ -82,7 +82,7 @@
   <div class="container">
     <div class="container1 d-flex justify-content-between">
       <div class="form-section">
-        <form method="post" action="" class="form-control p-4">
+        <form method="post" action="" class="form-control p-4" enctype="multipart/form-data">
         {% csrf_token %}
           {{ form.as_p }}
           <a href="{% url 'addpicture' %}">

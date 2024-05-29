@@ -36,11 +36,38 @@
     </div>
     <div>
         <p>Цена: {{ xususiyat.narxi }}</p>
-        <p>Дата размещения: {{ xususiyat.sana }}</p>
+        <p>Дата размещения: {{ xususiyat.sana |date:"Y-m-d H:i:s" }}</p>
         <p>Положениедел: {{ xususiyat.uy.положениедел }}</p>
         <p>Количество комнат: {{ xususiyat.uy.xonalar_soni }}</p>
         <p>Жилплощадь: {{ xususiyat.uy.yashash_maydoni }}</p>
     </div>
+
+{% if user.is_authenticated %}
+    <div class="row">
+        <div class="col-4">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary mb-4" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    {% for sharx in sharxlar %}
+        <div>
+            <b>{{ sharx.user_id.username }}</b>
+
+            <p class="mt-2 ms-4">
+                {{ sharx.description }}
+            </p>
+
+
+        </div>
+    {% endfor %}
+    {% else %}
+        <p>
+            <a href="{% url 'login' %}">Izoh yozish</a>
+        </p>
+    {% endif %}
 
 
 </body>
