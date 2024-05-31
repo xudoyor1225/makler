@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
+from django.http import HttpResponse
 
 from django.shortcuts import render,reverse
 from django.views.generic import TemplateView,ListView, View
@@ -94,7 +95,60 @@ class detail_home(View):
             return redirect(reverse("detail_home", kwargs={'a': uy.id}))
         print(sharxlar)
         return render(request, "detail_img.html", {'uy': uy, 'sharxlar': sharxlar, 'form': review_form})
+from docx import *
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from django.views import View
+from .models import Uylar, Xususiyati
+from docx import Document
+from docx.shared import Inches
 
+class DownloadWordView(View):
+    def get(self, request, pk, *args, **kwargs):
+        # Uylar modelidan pk orqali uy obyektini olish
+
+        # Ushbu uyga tegishli Xususiyati obyektlarini olish
+        xususiyatlar = Xususiyati.objects.filter(id=pk)
+        xususiyatlar2 = Xususiyati.objects.get(id=pk)
+        # Yangi Word hujjati yaratish
+        document = Document()
+        document.add_heading('Shartnoma', level=0)
+
+        # Uy egasining ma'lumotlarini hujjatga qo'shish
+        document.add_paragraph(f'Uy egasi ismi: {xususiyatlar2.uy.mijoz_id.ismi}')
+        document.add_paragraph(f'Uy egasi familiyasi: {xususiyatlar2.uy.mijoz_id.familyasi}')
+        document.add_paragraph(f'Uy egasi telefon raqami: {xususiyatlar2.uy.mijoz_id.tel}')
+
+        # Xususiyatlar jadvalini yaratish
+        table = document.add_table(rows=1, cols=8)
+        table.style = 'Table Grid'  # Jadval stilini o'rnatish
+
+        hdr_cells = table.rows[0].cells
+        hdr_cells[0].text = 'Holati'
+        hdr_cells[1].text = 'Yashash Maydoni'
+        hdr_cells[2].text = 'Xonalar Soni'
+        hdr_cells[3].text = 'Joylashuvi'
+        hdr_cells[4].text = 'Vazifasi'
+        hdr_cells[5].text = 'Narxi'
+        hdr_cells[6].text = 'Sana'
+        hdr_cells[7].text = 'Star'
+
+        for xususiyat in xususiyatlar:
+            row_cells = table.add_row().cells
+            row_cells[0].text = str(xususiyat.uy.holati)
+            row_cells[1].text = str(xususiyat.uy.yashash_maydoni)
+            row_cells[2].text = str(xususiyat.uy.xonalar_soni)
+            row_cells[3].text = str(xususiyat.uy.joylashuvi)
+            row_cells[4].text = str(xususiyat.vazifasi.vazifa)
+            row_cells[5].text = str(xususiyat.narxi)
+            row_cells[6].text = xususiyat.sana.strftime("%Y-%m-%d %H:%M:%S")
+            row_cells[7].text = str(xususiyat.star.id)
+
+        # Hujjatni yozish uchun HttpResponse tayyorlash
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+        response['Content-Disposition'] = f'attachment; filename=details_of_{xususiyatlar2.uy.id}.docx'
+        document.save(response)
+        return response
 class addpicture(View):
     def get(self,request):
         form=UypictureForm()

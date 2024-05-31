@@ -67,6 +67,7 @@ body {
         <p>Положениедел: {{ xususiyat.uy.положениедел }}</p>
         <p>Количество комнат: {{ xususiyat.uy.xonalar_soni }}</p>
         <p>Жилплощадь: {{ xususiyat.uy.yashash_maydoni }}</p>
+        <a href="{% url 'download_word' xususiyat.id %}">Save</a>
     </div>
 
 {% if user.is_authenticated %}
